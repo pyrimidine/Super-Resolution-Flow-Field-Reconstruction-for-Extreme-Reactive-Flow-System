@@ -26,7 +26,7 @@ parser.add_argument('--discriminatorLR', type=float, default=0.0001, help='learn
 parser.add_argument('--cuda', type=bool, default=True, help='enables cuda')
 parser.add_argument('--lastTrain', type=str, default='', help="path to generator weights (to continue training)")
 parser.add_argument('--physicalWeights', type=float, default=1e-5, help="PINN balance weight")
-parser.add_argument('--out', type=str, default='PIGAN_train1000_step200_depth2', help='folder to output model checkpoints')
+parser.add_argument('--out', type=str, default='./checkPoints', help='folder to output model checkpoints')
 parser.add_argument('--bi', type=bool, default=True, help='Binary image or not')
 parser.add_argument('--bi_th', type=float, default=0.2, help='Binary threshold')
 parser.add_argument('--depth', type=int, default=32, help='')
