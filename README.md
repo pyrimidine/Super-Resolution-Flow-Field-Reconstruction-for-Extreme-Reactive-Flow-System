@@ -12,7 +12,7 @@ pip install -r requirements.txt
 The dataset is calculated by TurfSIM of SCP around ~25GB.
 
 ### Downloading data
-1. The source files are listed in the **source** directory. Open the following link to download .dat source files:
+1. The source files are listed in the **source** directory. Open the following link to download .dat source files: https://cloud.tsinghua.edu.cn/d/5b1a402e5a1549d0a3a5/
 
 2. After the tif files are downloaded, run **generate_data.py** (under **source** directory). This will process the source files and construct an index for the dataset.
 
