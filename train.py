@@ -12,7 +12,6 @@ from torch.autograd import Variable
 import torchvision
 from models import *
 from data import *
-from visual import *
 from loss import *
 
 parser = argparse.ArgumentParser()
