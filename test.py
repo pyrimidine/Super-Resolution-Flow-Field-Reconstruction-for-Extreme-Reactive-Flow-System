@@ -16,7 +16,6 @@ from models import Generator, Discriminator, FeatureExtractor
 from visual import *
 from loss import *
 from data import *
-from visual import *
 
 
 parser = argparse.ArgumentParser()
