@@ -102,7 +102,6 @@ for i, (p_LR, p_HR, pmax, rho_HR, u_HR, v_HR, rho_HR_t, u_HR_t, v_HR_t) in enume
     sys.stdout.write('\r[%d/%d] Generator_Loss: %.4f Physics_Loss: %.4f Physics_Resudual: %.4f' % (i, len(dataloader), 
                                                                             generator_content_loss.item(), generator_physical_loss.item(), 
                                                                             np.mean(physical_residual.detach().cpu().numpy())))
-    show_tensor_test(i, pmax, [p_LR, p_LR, high_res_real, high_res_fake1, (high_res_real-high_res_fake1)], path=save_path)
     print('\n', generator_content_loss.item(), generator_physical_loss.item(), np.mean(physical_residual.detach().cpu().numpy()), np.mean(err), file=f)
 f.close
 
