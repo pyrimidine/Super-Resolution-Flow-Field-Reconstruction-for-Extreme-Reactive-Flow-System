@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import argparse
 #%%
 import sys
@@ -43,11 +41,10 @@ except OSError:
     pass
 
 
-path = r'E:\RDE_GAN_HR_dataset\p=7e5_17e5\dataset'
+path = r'.\dataset'
 dataloader = test_load_data(path, 'test', opt)
 
 generator = Generator(32, opt.upSampling)
-# generator.load_state_dict(torch.load('./' + opt.out + '/SRGANgenerator_final.pth'))
 generator = (torch.load(opt.dic + '/generator_final.pth'))
 
 # print (generator)
@@ -66,7 +63,6 @@ if opt.cuda:
 
 
 #%%
-# Pre-train generator using raw MSE loss
 print('Generator test')
 f = open(os.path.join(save_path, 'test.txt'), "w")
 mean_generator_content_loss = 0.0
@@ -93,8 +89,6 @@ for i, (p_LR, p_HR, pmax, rho_HR, u_HR, v_HR, rho_HR_t, u_HR_t, v_HR_t) in enume
         err = (p_HR.detach().cpu().numpy() - high_res_fake1.detach().cpu().numpy())**2
         err = err/(p_HR.detach().cpu().numpy())**2
 
-
-        # high_res_fake = finetune_net(high_res_fake1.detach(), physical_residual.detach())
 
     ######### Train generator #########
     generator.zero_grad()
