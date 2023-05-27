@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 #%%
 import argparse
 import os
@@ -82,7 +81,6 @@ optim_finetune = optim.Adam(finetune_net.parameters(), lr=opt.generatorLR)
 
 
 
-
 print('SR pre-training')
 for epoch in range(1):
     mean_generator_content_loss = 0.0
@@ -113,11 +111,6 @@ for epoch in range(1):
         generator.zero_grad()
 
         generator_content_loss = content_criterion1(high_res_fake1, high_res_real)
-        # generator_physical_loss = physical_criterion(physical_residual, physical_residual*0)
-        
-        # finetune_content_loss = content_criterion1(SA, physical_residual)
-        # mean_finetune_total_loss += finetune_content_loss.item()
-        # generator_total_loss += finetune_content_loss
 
         generator_total_loss = generator_content_loss 
 
@@ -137,8 +130,6 @@ for epoch in range(1):
 
     # Do checkpointing
     torch.save(generator, '%s/generator_final.pth' % opt.out)
-
-
 
 
 #%%
@@ -199,9 +190,6 @@ for epoch in range(opt.nEpochs):
         generator_adversarial_loss = adversarial_criterion(discriminator(high_res_fake1), ones_const)
         generator_physical_loss = physical_criterion(physical_residual, physical_residual*0)
         
-        # finetune_content_loss = content_criterion1(SA, physical_residual)
-        # mean_finetune_total_loss += finetune_content_loss.item()
-        # generator_total_loss += finetune_content_loss
 
         generator_total_loss = generator_content_loss + 1e-2*generator_adversarial_loss 
         generator_total_loss += 1e-1*generator_physical_loss
@@ -218,9 +206,6 @@ for epoch in range(opt.nEpochs):
         ######### Status and display #########
         sys.stdout.write('\r[ %d %d ][ %d %d ] Discriminator_Loss: %.4f Generator_Loss (Content/Advers/Total): %.4f %.4f %.4f Physics_Loss: %.4f' % (epoch, opt.nEpochs, i, len(dataloader),
         discriminator_loss.item(), generator_content_loss.item(), generator_adversarial_loss.item(), generator_total_loss.item(), generator_physical_loss.item()))
-
-    if (epoch+1)%1 == 0:
-        show_tensor(epoch, [p_LR, high_res_real, high_res_fake1, physical_residual], path=os.path.join('./', opt.out))
 
     sys.stdout.write('\r[%d %d][%d %d] Discriminator_Loss: %.4f Generator_Loss (Content/Advers/Total): %.4f %.4f %.4f Physics_Loss: %.4f\n' % (epoch, opt.nEpochs, i, len(dataloader),
     mean_discriminator_loss/len(dataloader), mean_generator_content_loss/len(dataloader), 
