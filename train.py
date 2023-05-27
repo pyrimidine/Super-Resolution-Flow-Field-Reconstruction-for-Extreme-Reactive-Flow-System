@@ -43,8 +43,8 @@ except OSError:
 if torch.cuda.is_available() and not opt.cuda:
     print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
-path = r'E:\RDE_GAN_HR_dataset\p=7e5_17e5\dataset'
-dataloader = load_data(path, 'train1000', opt)
+path = r'.\dataset\'
+dataloader = load_data(path, 'train', opt)
 
 generator = Generator(64, opt.upSampling)
 if opt.lastTrain != '':
